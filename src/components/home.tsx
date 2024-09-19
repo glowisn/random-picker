@@ -3,7 +3,7 @@ import RandomPicker from "./randomPicker";
 
 export default function Home() {
   return (
-    <div className="flex flex-col bg-gray-700 h-full min-h-screen">
+    <div className="flex h-full min-h-screen flex-col bg-gray-700">
       <Menu />
       <RandomPicker />
     </div>

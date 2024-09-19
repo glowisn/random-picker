@@ -1,6 +1,6 @@
 export default function Menu() {
   return (
-    <div className="flex flex-row h-16 p-4">
+    <div className="flex h-16 flex-row p-4">
       <p className="text-white">Menu</p>
     </div>
   );
