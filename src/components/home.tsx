@@ -1,8 +1,10 @@
+import Menu from "./menu";
 import RandomPicker from "./randomPicker";
 
 export default function Home() {
   return (
-    <div className="flex flex-row bg-gray-700 h-screen">
+    <div className="flex flex-col bg-gray-700 h-full min-h-screen">
+      <Menu />
       <RandomPicker />
     </div>
   );
