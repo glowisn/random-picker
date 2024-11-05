@@ -6,11 +6,11 @@ interface ItemProps {
 
 export default function Item({ name, weight, onRemoveClick }: ItemProps) {
   return (
-    <div className="m-4 flex gap-3 border border-solid border-white p-6 shadow">
-      <h1 className="rounded border border-white px-2 py-1 text-white">
+    <div className="flex gap-1 border border-solid border-white bg-gray-700 px-6 py-2 shadow">
+      <h1 className="rounded border border-white bg-slate-500 px-2 py-1 text-white">
         {name}
       </h1>
-      <p className="rounded border border-white px-2 py-1 text-white">
+      <p className="rounded border border-white bg-slate-500 px-2 py-1 text-white">
         {weight}
       </p>
       <button
