@@ -117,7 +117,7 @@ export default function RandomPicker() {
 
   return (
     <AlertDialog open={alertDialogOpen}>
-      <div className="m-4 flex w-96 flex-col items-center gap-4">
+      <div className="mx-auto my-4 flex w-96 flex-col items-center gap-4">
         <h1 className="text-3xl text-white">Random Picker</h1>
         {prevSearches.length > 0 && (
           <>
