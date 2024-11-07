@@ -4,15 +4,20 @@ import { useState } from "react";
 import { useRouletteStore } from "@/store/roulette";
 import clsx from "clsx";
 import Item from "./Items";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 export default function ItemsController() {
   const { items, addItem, removeItem, reset, result, setResult } =
     useRouletteStore();
 
   const [name, setName] = useState("");
-  const [weight, setWeight] = useState(0);
+  const [weight, setWeight] = useState<number | null>(null);
 
   const handelAddItem = (addName: string, addWeight: number) => {
+    if (addName === "" || addWeight <= 0) {
+      return;
+    }
     addItem(addName, addWeight);
     setName("");
     setWeight(0);
@@ -41,16 +46,12 @@ export default function ItemsController() {
   };
 
   return (
-    <div className="m-4 flex flex-col gap-3 border border-solid border-white p-6 shadow">
+    <div className="flex flex-col gap-3 border border-solid border-white p-6 shadow">
       <div className="flex flex-row">
         <h1 className="text-2xl font-bold text-white">ItemsController</h1>
-        <button
-          type="button"
-          className="ml-auto rounded border border-white px-2 py-1 text-white"
-          onClick={handleReset}
-        >
+        <Button type="button" className="ml-auto" onClick={handleReset}>
           Reset
-        </button>
+        </Button>
       </div>
       {items.map((item) => (
         <Item
@@ -61,35 +62,31 @@ export default function ItemsController() {
         />
       ))}
       <div className="flex gap-1">
-        <input
+        <Input
           type="text"
           id="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setName(e.target.value)
+          }
           placeholder="Name"
         />
-        <input
+        <Input
           type="number"
           id="weight"
-          value={weight}
-          onChange={(e) => setWeight(parseInt(e.target.value, 10))}
+          value={weight ?? ""}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setWeight(parseInt(e.target.value, 10))
+          }
           placeholder="Weight"
         />
-        <button
-          className="rounded bg-teal-500 px-4 py-2 font-bold text-white hover:bg-teal-700"
-          type="button"
-          onClick={() => handelAddItem(name, weight)}
-        >
+        <Button type="button" onClick={() => handelAddItem(name, weight ?? 0)}>
           Add Item
-        </button>
+        </Button>
       </div>
-      <button
-        className="rounded bg-teal-500 px-4 py-2 font-bold text-white hover:bg-teal-700"
-        type="button"
-        onClick={pickWithWeight}
-      >
+      <Button type="button" onClick={pickWithWeight}>
         Pick
-      </button>
+      </Button>
       {result && (
         <div className="flex gap-2">
           <h1

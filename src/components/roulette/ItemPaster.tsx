@@ -17,7 +17,7 @@ export default function ItemPaster() {
       />
       <Button
         type="button"
-        className="rounded border border-white p-2 text-white"
+        className=""
         onClick={() => {
           const items = text
             .split("\n")

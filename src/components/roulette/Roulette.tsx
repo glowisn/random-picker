@@ -1,11 +1,9 @@
-import Menu from "../menu";
 import ItemPaster from "./ItemPaster";
 import ItemsController from "./ItemsController";
 
 export default function Roulette() {
   return (
-    <div className="flex h-full min-h-screen flex-row bg-gray-800 p-4">
-      <Menu />
+    <div className="m-4 flex h-full flex-row gap-2 p-4">
       <ItemsController />
       <ItemPaster />
     </div>
