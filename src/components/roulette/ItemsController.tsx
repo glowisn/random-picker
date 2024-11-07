@@ -1,25 +1,25 @@
 "use client";
 
-import { ItemType } from "@/type/ItemType";
 import { useState } from "react";
+import { useRouletteStore } from "@/store/roulette";
+import clsx from "clsx";
 import Item from "./Items";
 
 export default function ItemsController() {
-  const [items, setItems] = useState<ItemType[]>([]);
+  const { items, addItem, removeItem, reset, result, setResult } =
+    useRouletteStore();
 
   const [name, setName] = useState("");
   const [weight, setWeight] = useState(0);
 
-  const [result, setResult] = useState<ItemType | null>(null);
-
-  const addItem = (addName: string, addWeight: number) => {
-    setItems([...items, { name: addName, weight: addWeight }]);
+  const handelAddItem = (addName: string, addWeight: number) => {
+    addItem(addName, addWeight);
     setName("");
     setWeight(0);
   };
 
-  const removeItem = (removeName: string) => {
-    setItems(items.filter((item) => item.name !== removeName));
+  const handleRemoveItem = (removeName: string) => {
+    removeItem(removeName);
   };
 
   const pickWithWeight = () => {
@@ -35,8 +35,8 @@ export default function ItemsController() {
     setResult(selectedItem || null);
   };
 
-  const reset = () => {
-    setItems([]);
+  const handleReset = () => {
+    reset();
     setResult(null);
   };
 
@@ -47,7 +47,7 @@ export default function ItemsController() {
         <button
           type="button"
           className="ml-auto rounded border border-white px-2 py-1 text-white"
-          onClick={reset}
+          onClick={handleReset}
         >
           Reset
         </button>
@@ -57,7 +57,7 @@ export default function ItemsController() {
           key={item.name}
           name={item.name}
           weight={item.weight}
-          onRemoveClick={removeItem}
+          onRemoveClick={() => handleRemoveItem(item.name)}
         />
       ))}
       <div className="flex gap-1">
@@ -78,7 +78,7 @@ export default function ItemsController() {
         <button
           className="rounded bg-teal-500 px-4 py-2 font-bold text-white hover:bg-teal-700"
           type="button"
-          onClick={() => addItem(name, weight)}
+          onClick={() => handelAddItem(name, weight)}
         >
           Add Item
         </button>
@@ -91,9 +91,23 @@ export default function ItemsController() {
         Pick
       </button>
       {result && (
-        <div className="rounded border border-white bg-gray-600">
-          <h1 className="text-white">Result</h1>
-          <p className="text-white">{result.name}</p>
+        <div className="flex gap-2">
+          <h1
+            className={clsx(
+              "w-[80px] rounded border border-white bg-gray-600",
+              "p-2 text-center text-white",
+            )}
+          >
+            결과
+          </h1>
+          <p
+            className={clsx(
+              "grow rounded border border-white bg-gray-600",
+              "p-2 text-center text-white",
+            )}
+          >
+            {result.name}
+          </p>
         </div>
       )}
     </div>
