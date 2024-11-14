@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 export default function ItemPaster() {
   const setItems = useRouletteStore((state) => state.setItems);
   const [text, setText] = useState("");
+
   return (
     <div className="flex flex-col gap-2">
       <textarea

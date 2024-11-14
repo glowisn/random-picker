@@ -11,6 +11,8 @@ import {
 import DeleteIcon from "@/public/svg/delete.svg";
 import Image from "next/image";
 import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 export default function RandomPicker() {
   const [list, setList] = useState<string[]>([]);
@@ -121,56 +123,56 @@ export default function RandomPicker() {
         <h1 className="text-3xl text-white">Random Picker</h1>
         {prevSearches.length > 0 && (
           <>
-            <ul className="grid grid-cols-4 rounded-md border-2 border-teal-300 p-2">
+            <ul className="grid grid-cols-4 rounded-md border-2 p-2">
               {prevSearches.map((presSearchItem) => {
                 return (
                   <div
                     key={presSearchItem}
-                    className="flex flex-row items-center gap-0.5 rounded-xl bg-emerald-100 p-1 align-middle"
+                    className="flex flex-row items-center"
                   >
-                    <button
+                    <Button
                       type="button"
                       onClick={() => handlePrevSearchesToList(presSearchItem)}
-                      className="rounded text-xs text-black shadow-lg"
+                      className=""
                     >
                       {presSearchItem}
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       type="button"
                       onClick={() => handlePrevSearchesDelete(presSearchItem)}
-                      className="flex items-center justify-center rounded-full bg-red-200 p-0.5 text-xs text-black shadow-lg"
+                      className="items-center justify-center"
                     >
                       x
-                    </button>
+                    </Button>
                   </div>
                 );
               })}
             </ul>
-            <button
+            <Button
               type="button"
-              className="rounded bg-emerald-200 p-1 text-sm text-black shadow-lg"
+              className="rounded"
               onClick={() => resetPrevSearches()}
             >
               검색 기록 초기화
-            </button>
+            </Button>
           </>
         )}
         {list.length > 0 && (
           <>
-            <ul className="flex flex-col items-center gap-4 rounded-md bg-teal-800 p-4">
+            <ul className="flex flex-col items-center gap-4 rounded-md p-4">
               {list.map((listItem) => {
                 return (
                   <li
                     key={listItem}
-                    className="flex flex-row items-center rounded-xl bg-emerald-100 align-middle"
+                    className="flex flex-row items-center align-middle"
                   >
                     <p className="flex border-black p-2 font-bold text-black shadow-sm">
                       {listItem}
                     </p>
-                    <button
+                    <Button
                       type="button"
                       onClick={() => handleDelete(listItem)}
-                      className="flex size-10 items-center justify-center rounded-full bg-red-200 p-2 text-xl text-black shadow-lg"
+                      className="flex size-10 items-center justify-center"
                     >
                       <Image
                         src={DeleteIcon}
@@ -178,26 +180,22 @@ export default function RandomPicker() {
                         width={20}
                         height={20}
                       />
-                    </button>
+                    </Button>
                   </li>
                 );
               })}
             </ul>
-            <button
-              type="button"
-              className="rounded bg-emerald-200 p-1 text-sm text-black shadow-lg"
-              onClick={() => handleReset()}
-            >
+            <Button type="button" className="" onClick={() => handleReset()}>
               비우기
-            </button>
+            </Button>
           </>
         )}
-        <input
+        <Input
           type="text"
           value={item}
           onChange={(e) => setItem(e.target.value)}
           placeholder="여기에 추가할 메뉴를 입력하세요"
-          className="w-[260px] rounded border-black bg-emerald-100 p-2 text-center text-black shadow-lg"
+          className="w-[260px]"
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === "Return") {
               handleAdd(item);
@@ -205,23 +203,23 @@ export default function RandomPicker() {
           }}
         />
 
-        <button
+        <Button
           type="submit"
           onClick={() => handleAdd(item)}
-          className="h-12 w-72 rounded bg-emerald-200 text-xl text-black shadow-lg"
+          className="h-12 w-72"
         >
           추가하기
-        </button>
+        </Button>
         <h3 className="m-4 flex min-h-16 min-w-[50%] items-center justify-center rounded border-[1.5px] border-emerald-700 bg-gray-200 p-2 text-xl shadow-lg">
           {result}
         </h3>
-        <button
+        <Button
           type="button"
           onClick={() => pickRandom()}
-          className="h-12 w-72 rounded bg-emerald-200 text-xl text-black shadow-lg"
+          className="h-12 w-72"
         >
           뽑기
-        </button>
+        </Button>
         {lastResult && (
           <p className="p-2 text-white">{lastResult}는 제외하고 뽑습니다</p>
         )}
